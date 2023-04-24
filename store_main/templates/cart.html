@@ -1,0 +1,23 @@
+{% if user_cart %}
+ {% for i in user_cart %}
+    ПРОДУКТ: {{ i.user_product }}<br>
+    общая стоимость: {{ i.total_for_product }}<br>
+    <form action="delete-product/{{ i.id }}" method="post">
+        {% csrf_token %}
+        KOLVK: <input type="number" min="1" max="i.user_product.product_count" value="{{ i.quantity }}">
+        <button>DELETE</button>
+    </form>
+    {% endfor %}
+<a href="/">dokupit</a>
+<form action="/order" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="VVEDI IMYA"> <br>
+    <input type="text" name="phone_number" placeholder="VVEDI NUMBER"> <br>
+    <input type="text" name="address" placeholder="VVEDI ADDRESS"> <br>
+    <button>oformit zakaz</button>
+
+</form>
+{% else %}
+ ваша корзина пуста <br>
+ <a href="/">kupit product</a>
+{% endif %}
